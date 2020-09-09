@@ -1,5 +1,7 @@
 import React, {Fragment,Component} from 'react';
 import Navbar from './components/layout/Navbar';
+import UserItem from './components/users/UserItem'
+import Users from './components/users/Users'
 import './App.css';
 
 class App extends Component {
@@ -9,6 +11,9 @@ class App extends Component {
             //  can use <fragment> as a ghost element, meaning it won't appear in the dom.
             <div className="App">
                 <Navbar title={'GitHub Finder'} icon={'fab fa-github'}/>
+                <div className="container">
+                <Users/>
+                </div>
             </div>
             // </fragment>
         );
