@@ -13,13 +13,22 @@ class App extends Component {
     };
 
     // used for http requests
-    async componentDidMount() {
+    // ====use this to populate users without searching====
+    // async componentDidMount() {
+    //     this.setState({loading: true})
+    //
+    //     const res = await axios.get(`https://api.github.com/users?client_id=
+    //     ${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=
+    //     ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+    //     this.setState({users: res.data, loading: false})
+    // }
+    // search github users
+    searchUsers = async text => {
         this.setState({loading: true})
-
-        const res = await axios.get(`https://api.github.com/users?client_id=
+        const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=
         ${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=
         ${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-        this.setState({users: res.data, loading: false})
+        this.setState({users: res.data.items, loading: false})
     }
 
     render() {
@@ -28,14 +37,14 @@ class App extends Component {
             <div className="App">
                 <Navbar title={'GitHub Finder'} icon={'fab fa-github'}/>
                 <div className="container">
-                    <Search />
-                <Users loading={this.state.loading} users={this.state.users}/>
+                    <Search searchUsers={this.searchUsers}/>
+                    <Users loading={this.state.loading} users={this.state.users}/>
                 </div>
             </div>
             // </fragment>
         );
 
-       // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hello from React'));
+        // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hello from React'));
 
     }
 }

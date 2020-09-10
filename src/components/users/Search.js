@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
     state = {
         text:''
     }
 
-    onSubmit = (e) => {
+    static propTypes = {
+        searchUsers: PropTypes.func.isRequired
+    };
+
+    onSubmit = e => {
         e.preventDefault();
-        console.log(this.state.text)
+        this.props.searchUsers(this.state.text);
+        this.setState({text: ''})
     }
 
     // using this function to change the state of the search bar based on whatever is typed into the box.
     // can also use [e.target.name] to target the name of the input element instead of using the text property of the state.
-    onChange = (e) => {
-        this.setState({text: e.target.value})
+    onChange = e => {
+        this.setState({[e.target.name]: e.target.value})
     }
 
     render(){
@@ -21,9 +27,9 @@ export class Search extends Component {
             <div>
                 {/*must use the bind method to define the state of the onChange method if we are not using an arrow function for
                 the onSubmit function.*/}
-                <form className="form" onSubmit={this.onSubmit.bind(this)}>
+                <form className="form" onSubmit={this.onSubmit}>
                     <input type="text" name="text" placeholder="Search Users..." value={this.state.text} onChange={this.onChange}/>
-                    <input type="search" value="Search" className="btn btn-block btn-dark"/>
+                    <input type="submit" value="Search" className='btn btn-dark btn-block'/>
                 </form>
             </div>
         )
