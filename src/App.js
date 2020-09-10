@@ -36,13 +36,14 @@ class App extends Component {
     }
 
     render() {
+        const {users, loading} = this.state;
         return (
             //  can use <fragment> as a ghost element, meaning it won't appear in the dom.
             <div className="App">
                 <Navbar title={'GitHub Finder'} icon={'fab fa-github'}/>
                 <div className="container">
-                    <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={this.state.users.length > 0 ? true: false}/>
-                    <Users loading={this.state.loading} users={this.state.users}/>
+                    <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={users.length > 0 ? true : false}/>
+                    <Users loading={loading} users={users}/>
                 </div>
             </div>
             // </fragment>
