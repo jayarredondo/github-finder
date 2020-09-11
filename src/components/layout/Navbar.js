@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
- const Navbar = ({icon, title}) => {
+const Navbar = ({icon, title}) => {
 
     // Props are properties you can pass into a component from the outside.
     // you can set the default props here, and they will be used if nothing is passed in for the props you declare.
@@ -16,13 +17,23 @@ import PropTypes from 'prop-types';
     //     icon: PropTypes.string.isRequired
     // }
 
-        return (
-            <nav className="navbar bg-primary">
-                <h1>
-                    <i className={icon}/> {title}
-                </h1>
-            </nav>
-        )
+    return (
+        <nav className="navbar bg-primary">
+            <h1>
+                <i className={icon}/> {title}
+            </h1>
+            {/* we don't use 'a' tags because this is client side routing and will reset the state, instead we use the 'link' */}
+            <ul>
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/about'>About</Link>
+                </li>
+            </ul>
+
+        </nav>
+    )
 
 }
 
